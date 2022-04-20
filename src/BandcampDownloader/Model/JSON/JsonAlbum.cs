@@ -25,6 +25,9 @@ namespace BandcampDownloader
         [JsonProperty("trackinfo")]
         public List<JsonTrack> Tracks { get; set; }
 
+        [JsonProperty("url")]
+        public string Url { get;  set; }
+
         public Album ToAlbum()
         {
             // Some albums do not have a cover art
@@ -36,7 +39,7 @@ namespace BandcampDownloader
                 ReleaseDate = AlbumData.ReleaseDate;
             }
 
-            var album = new Album(Artist, artworkUrl, ReleaseDate, AlbumData.AlbumTitle);
+            var album = new Album(Artist, artworkUrl, ReleaseDate, AlbumData.AlbumTitle, Url);
 
             // Some tracks do not have their URL filled on some albums (pre-release...)
             // Forget those tracks here

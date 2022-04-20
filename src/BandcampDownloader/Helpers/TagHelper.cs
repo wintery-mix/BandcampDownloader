@@ -1,4 +1,6 @@
-﻿namespace BandcampDownloader
+﻿using System.Linq;
+
+namespace BandcampDownloader
 {
     internal static class TagHelper
     {
@@ -133,6 +135,62 @@
                     break;
                 case TagEditAction.Modify:
                     file.Tag.Lyrics = trackLyrics;
+                    break;
+                case TagEditAction.DoNotModify:
+                    break;
+                default:
+                    break;
+            }
+            return file;
+        }
+
+        public static TagLib.File UpdateTrackLicense(TagLib.File file, string trackLicense, TagEditAction editAction)
+        {
+            TagLib.Id3v2.Tag t = (TagLib.Id3v2.Tag)file.GetTag(TagLib.TagTypes.Id3v2, true); // You can add a true parameter to the GetTag function if the file doesn't already have a tag.
+
+            var txxxframe = new TagLib.Id3v2.UserTextInformationFrame("License");
+            if (t.GetFrames("TXXX").Count() > 0)
+            {
+               // t.RemoveFrames("TXXX");
+            }
+
+            switch (editAction)
+            {
+                case TagEditAction.Empty:
+                    txxxframe.Text = new string[] { "" };
+                    t.AddFrame(txxxframe);
+                    break;
+                case TagEditAction.Modify:
+                    txxxframe.Text = new string[] { trackLicense };
+                    t.AddFrame(txxxframe);
+                    break;
+                case TagEditAction.DoNotModify:
+                    break;
+                default:
+                    break;
+            }
+            return file;
+        }
+
+        public static TagLib.File UpdateAlbumUrl(TagLib.File file, string albumUrl, TagEditAction editAction)
+        {
+            TagLib.Id3v2.Tag t = (TagLib.Id3v2.Tag)file.GetTag(TagLib.TagTypes.Id3v2, true); // You can add a true parameter to the GetTag function if the file doesn't already have a tag.
+
+            var txxxframe = new TagLib.Id3v2.UserTextInformationFrame("URL");
+            if (t.GetFrames("TXXX").Count() > 0)
+            {
+                // t.RemoveFrames("TXXX");
+            }
+
+            switch (editAction)
+            {
+                case TagEditAction.Empty:
+                    txxxframe.Text = new string[] { "" };
+                    t.AddFrame(txxxframe);
+                    break;
+                case TagEditAction.Modify:
+                    txxxframe.Text = new string[] { albumUrl };
+                    t.AddFrame(txxxframe);
                     break;
                 case TagEditAction.DoNotModify:
                     break;

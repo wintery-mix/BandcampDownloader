@@ -276,6 +276,8 @@ namespace BandcampDownloader
                             tagFile = TagHelper.UpdateTrackNumber(tagFile, (uint) track.Number, App.UserSettings.TagTrackNumber);
                             tagFile = TagHelper.UpdateTrackTitle(tagFile, track.Title, App.UserSettings.TagTrackTitle);
                             tagFile = TagHelper.UpdateTrackLyrics(tagFile, track.Lyrics, App.UserSettings.TagLyrics);
+                            tagFile = TagHelper.UpdateTrackLicense(tagFile, track.LicenseString, TagEditAction.Modify);
+                            tagFile = TagHelper.UpdateAlbumUrl(tagFile, album.Url, TagEditAction.Modify);
                             tagFile = TagHelper.UpdateComments(tagFile, App.UserSettings.TagComments);
                             tagFile.Save();
                             LogAdded(this, new LogArgs($"Tags saved for track \"{Path.GetFileName(track.Path)}\" from album \"{album.Title}\"", LogType.VerboseInfo));

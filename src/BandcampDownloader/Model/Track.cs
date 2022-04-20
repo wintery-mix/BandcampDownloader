@@ -36,11 +36,12 @@
         /// The track title.
         /// </summary>
         public string Title { get; set; }
+        public string LicenseString { get; set; }
 
         /// <summary>
         /// Initializes a new Track.
         /// </summary>
-        public Track(Album album, double duration, string lyrics, string mp3Url, int number, string title)
+        public Track(Album album, double duration, string lyrics, string mp3Url, int number, string title, string licenseString)
         {
             Album = album;
             Duration = duration;
@@ -48,6 +49,7 @@
             Mp3Url = mp3Url;
             Number = number;
             Title = title;
+            LicenseString = licenseString;
             // Must be done after other properties are filled!
             Path = ParseTrackFilePath();
         }

@@ -56,6 +56,8 @@ namespace BandcampDownloader
         /// </summary>
         public string Title { get; set; }
 
+        public string Url { get; set; }
+
         /// <summary>
         /// The list of tracks contained in the album.
         /// </summary>
@@ -64,12 +66,13 @@ namespace BandcampDownloader
         /// <summary>
         /// Initializes a new Album.
         /// </summary>
-        public Album(string artist, string artworkUrl, DateTime releaseDate, string title)
+        public Album(string artist, string artworkUrl, DateTime releaseDate, string title, string url)
         {
             Artist = artist;
             ArtworkUrl = artworkUrl;
             ReleaseDate = releaseDate;
             Title = title;
+            Url = url;
             // Must be done after other properties are filled!
             Path = ParseFolderPath();
             // Must be done after Path is set!
