@@ -146,13 +146,8 @@ namespace BandcampDownloader
 
         public static TagLib.File UpdateTrackLicense(TagLib.File file, string trackLicense, TagEditAction editAction)
         {
-            TagLib.Id3v2.Tag t = (TagLib.Id3v2.Tag)file.GetTag(TagLib.TagTypes.Id3v2, true); // You can add a true parameter to the GetTag function if the file doesn't already have a tag.
-
+            TagLib.Id3v2.Tag t = (TagLib.Id3v2.Tag)file.GetTag(TagLib.TagTypes.Id3v2, true);
             var txxxframe = new TagLib.Id3v2.UserTextInformationFrame("License");
-            if (t.GetFrames("TXXX").Count() > 0)
-            {
-               // t.RemoveFrames("TXXX");
-            }
 
             switch (editAction)
             {
@@ -174,13 +169,8 @@ namespace BandcampDownloader
 
         public static TagLib.File UpdateAlbumUrl(TagLib.File file, string albumUrl, TagEditAction editAction)
         {
-            TagLib.Id3v2.Tag t = (TagLib.Id3v2.Tag)file.GetTag(TagLib.TagTypes.Id3v2, true); // You can add a true parameter to the GetTag function if the file doesn't already have a tag.
-
+            TagLib.Id3v2.Tag t = (TagLib.Id3v2.Tag)file.GetTag(TagLib.TagTypes.Id3v2, true);
             var txxxframe = new TagLib.Id3v2.UserTextInformationFrame("URL");
-            if (t.GetFrames("TXXX").Count() > 0)
-            {
-                // t.RemoveFrames("TXXX");
-            }
 
             switch (editAction)
             {

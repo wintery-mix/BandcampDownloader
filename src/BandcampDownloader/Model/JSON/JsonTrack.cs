@@ -27,6 +27,7 @@ namespace BandcampDownloader
             var licenseLookup = new System.Collections.Generic.Dictionary<int, string>
             {
                 [1] = "All Rights Reserved ©️",
+                [2] = "CC BY-NC-ND 3.0",
                 [3] = "CC BY-NC-SA 3.0",
                 [4] = "CC BY-NC 3.0",
                 [5] = "CC BY-ND 3.0",
@@ -36,6 +37,7 @@ namespace BandcampDownloader
 
             var mp3Url = (File.Url.StartsWith("//") ? "http:" : "") + File.Url; // "//example.com" Uri lacks protocol
             var number = Number == 0 ? 1 : Number; // For bandcamp track pages, Number will be 0. Set 1 instead
+
             var licenseString = "";
             try
             {
@@ -43,8 +45,9 @@ namespace BandcampDownloader
             }
             catch
             {
-                System.Diagnostics.Debugger.Break();
+                licenseString = string.Format("Unknown License Type {0}", LicenseType);
             }
+
             return new Track(album, Duration, Lyrics, mp3Url, number, Title, licenseString);
         }
     }
